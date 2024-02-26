@@ -21,7 +21,7 @@ def generate_launch_description():
     
     wall_follower_node_py = Node(
         package='wall_following_assigment',
-        executable='wall_follower_solution.py',
+        executable='wall_follower.py',
         name='wall_follower_node',
         output='screen',
         parameters=[{"forward_speed": forward_speed_arg,

@@ -10,7 +10,7 @@ def generate_launch_description():
     world_file = PathJoinSubstitution(
         [FindPackageShare("wall_following_assigment"),
         "worlds",
-        "walls_one_sided.world"],
+        "walls_two_sided.world"],
     )
 
     gazebo_launch = PathJoinSubstitution(

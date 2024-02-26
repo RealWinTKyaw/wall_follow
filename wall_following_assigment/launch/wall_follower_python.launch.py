@@ -1,24 +1,24 @@
 #!/usr/bin/python3
 import os
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.substitutions import TextSubstitution
+from launch_ros.substitutions import FindPackageShare
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
     
     #declare arg
-    forward_speed_arg = '0.8'
+    forward_speed_arg = '1.0'
     distance_to_wall_arg = '1.0'
-
-
 
     #node 
     wall_follower_node_py = Node(
         package='wall_following_assigment',
-        executable='wall_follower_solution.py',
+        executable='wall_follower.py',
         name='wall_follower_node',
         output='screen',
         parameters=[{"forward_speed": forward_speed_arg,
@@ -28,7 +28,7 @@ def generate_launch_description():
     )
     
     wall_follower_node_cpp = Node(package='wall_following_assigment',
-         executable='wall_follower',
+         executable='wall_follower_node',
          name='wall_follower_node_cpp',
          output='screen',
          parameters=[{"forward_speed": forward_speed_arg,
@@ -36,9 +36,9 @@ def generate_launch_description():
                       }],
          remappings=[('/husky/cmd_vel', '/husky_velocity_controller/cmd_vel_unstamped')]
                       )
+    
 
     ld = LaunchDescription()
-    
     ld.add_action(wall_follower_node_py)
     
 
